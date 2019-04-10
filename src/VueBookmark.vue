@@ -30,6 +30,10 @@
             storageName: {
                 default: 'bookmark',
                 type: String
+            },
+            defaultName: {
+                default: '',
+                type: String
             }
         },
         data: function () {
@@ -47,7 +51,7 @@
         },   
         methods:{
             toggleBookmark(){
-                let items, item = {url: this.$route.fullPath, name: this.$route.name ? this.$route.name : ''};
+                let items, item = {url: this.$route.fullPath, name: this.$route.name ? this.$route.name : this.defaultName};
 
                 if (localStorage.getItem(this.storageName)) {
                     items = JSON.parse(localStorage.getItem(this.storageName))

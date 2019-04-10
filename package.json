@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/tposcic/vue-bookmark"
   },
+  "keywords": ["vue", "bookmark", "favorite", "localstorage"],
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
