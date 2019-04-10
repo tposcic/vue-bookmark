@@ -1,29 +1,56 @@
 <template>
-    <i title="Add to watch list" @click="toggleFavorite()" :class="{ 'active': status }" class="fa fa-bookmark favoriteIcon" aria-hidden="true"></i>
+    <div 
+    @click="toggleBookmark()" 
+    :class="{ 'active': status }" 
+    class="vue-bookmark-wrapper">
+        <slot>
+            <i title="Add to bookmark" class="fa fa-bookmark vue-bookmark-icon" aria-hidden="true"></i>
+        </slot>
+    </div>
 </template>
+
+<style scoped>
+    .vue-bookmark-wrapper{
+        display: inline;
+        position: relative;
+    }
+    .vue-bookmark-icon{
+        color: #009688;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+    .vue-bookmark-wrapper.active .vue-bookmark-icon{
+        color: #0056b3;
+    }
+</style>
 
 <script>
     export default {
-        data() {
+        props: {
+            storageName: {
+                default: 'bookmark',
+                type: String
+            }
+        },
+        data: function () {
             return {
                 status: false,
             }
         },
         mounted() {
-            this.checkFavorite();
+            this.checkBookmark();
         },
         watch:{
             $route(){
-                this.checkFavorite();
+                this.checkBookmark();
             }
         },   
         methods:{
-            toggleFavorite(){
-                let item = {url: this.$route.fullPath, name: this.$route.name};
-                let items;
+            toggleBookmark(){
+                let items, item = {url: this.$route.fullPath, name: this.$route.name ? this.$route.name : ''};
 
-                if (localStorage.getItem('favorites')) {
-                    items = JSON.parse(localStorage.getItem('favorites'))
+                if (localStorage.getItem(this.storageName)) {
+                    items = JSON.parse(localStorage.getItem(this.storageName))
                 } else {
                     items = [];
                 }
@@ -37,19 +64,14 @@
                     this.status = true;
                 }
 
-                localStorage.setItem('favorites', JSON.stringify(items))
+                localStorage.setItem(this.storageName, JSON.stringify(items))
             }, 
-            checkFavorite(){
-                let item = {url: this.$route.fullPath, name: this.$route.name};
-                let items;
+            checkBookmark(){
+                let items, item = {url: this.$route.fullPath, name: this.$route.name ? this.$route.name : ''};
 
-                if (localStorage.getItem('favorites')) {
-                    items = JSON.parse(localStorage.getItem('favorites'))
-                    if(items.filter(e => e.url === item.url).length > 0){
-                        this.status = true;
-                    } else {
-                        this.status = false;
-                    }
+                if (localStorage.getItem(this.storageName)) {
+                    items = JSON.parse(localStorage.getItem(this.storageName))
+                    this.status = items.filter(e => e.url === item.url).length > 0 ? true : false;
                 } else {
                     this.status = false;
                 }

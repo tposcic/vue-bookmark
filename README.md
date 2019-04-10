@@ -2,6 +2,11 @@
 
 Vue component that enables localstorage based Vue route bookmarks
 
+It will store an object array in JSON with the following format:
+{url: '', name: ''}
+
+The name will be fetched from the current route name or stored as an empty string
+
 ## Installation
 
 ```js
@@ -40,4 +45,23 @@ or you can name it
 import VueBookmark from 'vue-bookmark';
 
 Vue.component('vue-bookmark', VueBookmark)
+```
+
+### Props
+
+#### storageName
+
+Sets the name that will be used for the localstorage item
+Default: 'bookmark'
+
+```html
+<vue-bookmark storageName="bookmark"></vue-bookmark>
+```
+
+### Slot
+
+The component uses a Font Awesome 4.7 icon as default but you can use any other element with the slot:
+
+```html
+<vue-bookmark><i class="large material-icons">bookmark</i></vue-bookmark>
 ```
