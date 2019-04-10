@@ -10,7 +10,7 @@ npm i --save vue-bookmark
 
 ### Browser
 
-Include the script file, then install the component with `Vue.use(VueBookmark);` e.g.:
+Include the script file and install the component with `Vue.use(VueBookmark);`
 
 ```html
 <script type="text/javascript" src="node_modules/vuejs/dist/vue.min.js"></script>
@@ -20,16 +20,24 @@ Include the script file, then install the component with `Vue.use(VueBookmark);`
 </script>
 ```
 
+Following that you can use it like so:
+
+```html
+<vue-bookmark></vue-bookmark>
+```
+
 ### Module
 
 ```js
 import VueBookmark from 'vue-bookmark';
+
+Vue.use(VueBookmark);
 ```
 
-## Usage
+or you can name it
 
-Once installed, it can be used in a template as simply as:
+```js
+import VueBookmark from 'vue-bookmark';
 
-```html
-<vue-bookmark></vue-bookmark>
+Vue.component('vue-bookmark', VueBookmark)
 ```
