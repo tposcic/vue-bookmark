@@ -65,3 +65,8 @@ The component uses a Font Awesome 4.7 icon as default but you can use any other 
 ```html
 <vue-bookmark><i class="large material-icons">bookmark</i></vue-bookmark>
 ```
+
+### Planned
+
+- Add database storage of bookmarks
+- Add editing of bookmark name when clicked
